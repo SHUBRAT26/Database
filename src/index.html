@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>Video Galaxy</title>
+
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script>
+    gapi.load("client");
+  </script>
+  <script type="module" src="index.js"></script>
+  <style>
+    html {
+      display: flex;
+    }
+
+    body {
+      width: 100%;
+      background-color: red;
+    }
+
+    .wrapper {
+      justify-content: center;
+      display: flex;
+      height: 500px;
+      align-content: center;
+      align-items: center;
+    }
+
+    .wrapper span {
+      margin-left: 20px;
+      font-style: italic;
+      font-weight: bold;
+    }
+
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <i class="fa fa-search"></i>
+  <app-root>
+    <div class="wrapper"><div class="loader"></div><span>Loading...</span></div>
+  </app-root>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</body>
+
+</html>
