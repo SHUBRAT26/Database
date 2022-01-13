@@ -93,7 +93,7 @@ class Home extends LitElement {
   /**
    * Lifecycle callback method
    */
-  async connectedCallback() {
+  async connectedCallback() { 
     await fetch("https://reqres.in/api/users?page=2")
       .then((response) => response.json())
       .then((json) => {
