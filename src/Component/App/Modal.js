@@ -80,7 +80,7 @@ class MyDialog extends LitElement {
         })}"
       >
         <h1 class="title ">Edit your Data</h1>
-        <div id="fetchedUser_id">ID: ${this.data.id}</div>
+        <div id="fetchedUser_id">${this.data.id}</div>
         <lion-form>
     <form>
       <lion-input name="firstName" id="updatedFirstName" label="First Name" .modelValue=${this.data.first_name}></lion-input>
