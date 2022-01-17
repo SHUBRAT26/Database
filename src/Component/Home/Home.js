@@ -91,6 +91,18 @@ export default class Home extends LitElement {
         .searchBox {
           margin: 15px;
           float: right;
+          display: flex;
+          border: 1px solid lightcoral;
+          padding: 1%;
+          border-radius: 10px 10px;
+          background-color: lightcoral;
+          box-shadow: 0 0 60px rgba(0, 0, 0, 50%);
+          display: block;
+          width: 16%;
+          position: relative;
+          top: 39%;
+      }
+      
         }
 
         #search_id {
@@ -98,7 +110,165 @@ export default class Home extends LitElement {
         }
 
         #search_click {
-          margin-right: 5px;
+          margin-left: 65px;
+          margin-top: 5px;
+        }
+
+        $breakpoint: 750px;
+        $heading-color: #43bac0;
+
+        * {
+          box-sizing: border-box;
+        }
+
+        .wrapper {
+          width: 100%;
+          max-width: 1000px;
+          margin: 1em auto;
+          padding: 1em;
+        }
+
+        .is-striped {
+          background-color: rgba(233, 200, 147, 0.2);
+        }
+
+        /* Table column sizing
+        ================================== */
+        .id-cell {
+          width: 5%;
+        }
+
+        .firstName-cell {
+          width: 6%;
+        }
+
+        .lastName-cell {
+          width: 3%;
+        }
+
+        .email-link-cell {
+          width: 20%;
+        }
+        .edit-link-cell {
+          width: 7%;
+        }
+        .delete-link-cell {
+          width: 5%;
+        }
+
+        .pdf-cell {
+          width: 13%;
+        }
+
+        /* Apply styles
+        ================================== */
+        .Rtable {
+          display: flex;
+          flex-wrap: wrap;
+          margin: 0 0 3em 0;
+          padding: 0;
+          box-shadow: 0 0 60px rgba(0, 0, 0, 100%);
+        }
+        .Rtable .Rtable-row {
+          width: 100%;
+          display: flex;
+        }
+        .Rtable .Rtable-row .Rtable-cell {
+          box-sizing: border-box;
+          flex-grow: 1;
+          padding: 0.8em 1.2em;
+          overflow: hidden;
+          list-style: none;
+        }
+        .Rtable .Rtable-row .Rtable-cell.column-heading {
+          background-color: #43bac0;
+          color: white;
+          padding: 1em;
+        }
+        .Rtable .Rtable-row .Rtable-cell .Rtable-cell--heading {
+          display: none;
+        }
+        .Rtable .Rtable-row .Rtable-cell .Rtable-cell--content a {
+          font-size: 2em;
+          color: #333;
+        }
+        .Rtable .Rtable-row .Rtable-cell .Rtable-cell--content .webinar-date {
+          font-weight: 700;
+        }
+
+        /* Responsive
+        ==================================== */
+        @media all and (max-width: 750px) {
+          .is-striped {
+            background-color: white;
+          }
+
+          .Rtable--collapse {
+            display: block;
+            width: 100%;
+            padding: 1em;
+            box-shadow: none;
+          }
+          .Rtable--collapse .Rtable-row {
+            box-sizing: border-box;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 2em;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+          }
+          .Rtable--collapse .Rtable-row .Rtable-cell {
+            width: 100% !important;
+            display: flex;
+            align-items: center;
+          }
+          .Rtable--collapse .Rtable-row .Rtable-cell .Rtable-cell--heading {
+            display: inline-block;
+            flex: 1;
+            max-width: 120px;
+            min-width: 120px;
+            color: #43bac0;
+            font-weight: 700;
+            border-right: 1px solid #ccc;
+            margin-right: 1em;
+          }
+          .Rtable--collapse .Rtable-row .Rtable-cell .Rtable-cell--content {
+            flex: 2;
+            padding-left: 1em;
+          }
+          .Rtable--collapse .firstName-cell {
+            background-color: #43bac0;
+            color: white;
+            font-weight: 700;
+            order: -1;
+          }
+          .Rtable--collapse .firstName-cell .Rtable-cell--content {
+            padding-left: 0 !important;
+          }
+          .Rtable--collapse .Rtable-row--head {
+            display: none;
+          }
+          .searchBox{
+          margin: 15px;
+          float: right;
+          display: flex;
+          border: 1px solid lightcoral;
+          padding: 1%;
+          border-radius: 10px 10px;
+          background-color: lightcoral;
+          box-shadow: 0 0 60px rgba(0, 0, 0, 50%);
+          display: block;
+          width: 32%;
+          position: relative;
+          top: 39%;
+          right: 12%;
+          }
+        }
+        .no-flexbox .Rtable {
+          display: block;
+        }
+        .no-flexbox .Rtable.Rtable-cell {
+          width: 100%;
         }
       `,
     ];
@@ -144,6 +314,7 @@ export default class Home extends LitElement {
     super.connectedCallback();
   }
 
+  /** HTML page rendering */
   render() {
     let finalTemplate;
     if (!this.errorResponse) {
@@ -159,86 +330,116 @@ export default class Home extends LitElement {
                 <lion-input name="search" id="search_id"></lion-input>
               </span>
               <span>
-              <lion-button
+                <lion-button
                   name="seachBtnClick"
                   id="search_click"
                   @click="${this.searchList}"
                   >Search</lion-button
                 >
-                </span>
+              </span>
             </div>
-            <table width="100%" border="1">
-              <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Delete Specific Data</th>
-                <th>Edit Specific Data</th>
-              </tr>
-              <tr id="myList">
-                <td>
-                  ${repeat(
-                    this.recommendedData2.data,
-                    (item) => item.id,
-                    (item) => html`<p><td>${JSON.stringify(item.id)}</td></p>
-                      <hr />`
-                  )}
-                </td>
-                <td>
-                  ${repeat(
-                    this.recommendedData2.data,
-                    (item) => item.id,
-                    (item) => html`<p>
-                        <td>${item.first_name}</td>
-                      </p>
-                      <hr />`
-                  )}
-                </td>
-                <td>
-                  ${repeat(
-                    this.recommendedData2.data,
-                    (item) => item.id,
-                    (item) => html`<p>
-                        <td>${item.last_name}</td>
-                      </p>
-                      <hr />`
-                  )}
-                </td>
-                <td>
-                  ${repeat(
-                    this.recommendedData2.data,
-                    (item) => item.id,
-                    (item) => html`<p><td>${item.email}</td></p>
-                      <hr />`
-                  )}
-                </td>
-                <td>
-                  ${repeat(
-                    this.recommendedData2.data,
-                    (item) => item.id,
-                    (item) => html`<p class="option-btn">
-              <lion-button class="delete-btn" @click=${this.deleteData.bind(
-                this,
-                item
-              )}>Delete</lion-buton>
-              </p><hr>`
-                  )}
-                </td>
-                <td>
-                  ${repeat(
-                    this.recommendedData2.data,
-                    (item) => item.id,
-                    (item) => html`<p class="option-btn">
-              <lion-button class="edit-btn" @click=${this.EditDataDialog.bind(
-                this,
-                item
-              )}>Edit</lion-buton>
-              </p><hr>`
-                  )}
-                </td>
-              </tr>
-            </table>
+            <div class="wrapper">
+              <div class="Rtable Rtable--5cols Rtable--collapse">
+                <div class="Rtable-row Rtable-row--head">
+                  <div class="Rtable-cell id-cell column-heading">ID</div>
+                  <div class="Rtable-cell firstName-cell column-heading">
+                    First Name
+                  </div>
+                  <div class="Rtable-cell lastName-cell column-heading">
+                    Last Name
+                  </div>
+                  <div class="Rtable-cell email-link-cell column-heading">
+                    Email
+                  </div>
+                  <div
+                    class="Rtable-cell Edit-link-cell column-heading"
+                    style="width: 20%">
+                    Edit Data
+                  </div>
+                  <div
+                    class="Rtable-cell Delete-link-cell column-heading"
+                    style="width: 20%">
+                    Delete Data
+                  </div>
+                </div>
+
+                <div class="Rtable-row">
+                  <div class="Rtable-cell id-cell">
+                    <div class="Rtable-cell--heading">ID</div>
+                    <div class="Rtable-cell--content data-content">
+                      <span class="webinar-date"
+                        >${repeat(
+                          this.recommendedData2.data,
+                          (item) => item.id,
+                          (item) => html`<p>${JSON.stringify(item.id)}</p> `
+                        )}</span
+                      >
+                    </div>
+                  </div>
+                  <div class="Rtable-cell id-cell">
+                    <div class="Rtable-cell--heading">First Name</div>
+                    <div class="Rtable-cell--content data-content">
+                      ${repeat(
+                        this.recommendedData2.data,
+                        (item) => item.id,
+                        (item) => html`<p>${item.first_name}</p> `
+                      )}
+                    </div>
+                  </div>
+                  <div class="Rtable-cell lastName-cell">
+                    <div class="Rtable-cell--heading">Last Name</div>
+                    <div class="Rtable-cell--content lastName-link-content">
+                      ${repeat(
+                        this.recommendedData2.data,
+                        (item) => item.id,
+                        (item) => html`<p>${item.last_name}</p> `
+                      )}
+                    </div>
+                  </div>
+                  <div class="Rtable-cell email-link-cell">
+                    <div class="Rtable-cell--heading">Email</div>
+                    <div class="Rtable-cell--content email-link-content">
+                      ${repeat(
+                        this.recommendedData2.data,
+                        (item) => item.id,
+                        (item) => html`<p>${item.email}</p>`
+                      )}
+                    </div>
+                  </div>
+                  <div class="Rtable-cell email-link-cell">
+                    <div class="Rtable-cell--heading">Edit Data</div>
+                    <div class="Rtable-cell--content Edit-link-content">
+                      ${repeat(
+                        this.recommendedData2.data,
+                        (item) => item.id,
+                        (item) => html`<p class="option-btn">
+                <lion-button class="edit-btn" @click=${this.EditDataDialog.bind(
+                  this,
+                  item
+                )}>Edit</lion-buton>
+                </p>`
+                      )}
+                    </div>
+                  </div>
+                  <div class="Rtable-cell email-link-cell">
+                    <div class="Rtable-cell--heading">Delete</div>
+                    <div class="Rtable-cell--content delete-link-content">
+                      ${repeat(
+                        this.recommendedData2.data,
+                        (item) => item.id,
+                        (item) => html`<p class="option-btn">
+                <lion-button class="delete-btn" @click=${this.deleteData.bind(
+                  this,
+                  item
+                )}>Delete</lion-buton>
+                </p>`
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <my-dialog
               ?opened="${this.dialogVisible}"
               data="${this.sendEditFormData}"
@@ -339,6 +540,7 @@ export default class Home extends LitElement {
     }
   };
 
+  /** Delete specific data from database */
   deleteData = async (id) => {
     await fetch(`https://reqres.in/api/users/2`, {
       method: "DELETE",
@@ -371,10 +573,11 @@ export default class Home extends LitElement {
       });
   };
 
+  /** Search Specific data based on ID, FirstName and LastName */
   searchList() {
     let searchData = this.shadowRoot.getElementById("search_id").value;
     this.storedData = this.recommendedData2.data;
-    if(searchData){
+    if (searchData) {
       var newArray = this.recommendedData2.data.filter(function (el) {
         return (
           el.id === parseInt(searchData) ||
@@ -388,23 +591,25 @@ export default class Home extends LitElement {
         setTimeout(() => {
           this.recommendedData2.data = this.storedData;
         }, 1000);
-      }else {
+      } else {
         this.recommendedData2.data = this.storedData;
-        window.alert('No data present')
+        window.alert("No data present");
         this.requestUpdate();
       }
-    }else{
-      window.alert('Please enter the Data')
+    } else {
+      window.alert("Please enter the Data");
+      this.recommendedData2.data = this.storedData;
+      this.requestUpdate();
     }
-    
   }
 
+  /**Edit Specific Data from Table */
   EditDataDialog(e) {
     this.sendEditFormData = e;
     this.dialogVisible = !this.dialogVisible;
-
   }
 
+  /**Close Dialog box */
   closeDialog(e) {
     console.log(e);
     this.dialogVisible = true;
