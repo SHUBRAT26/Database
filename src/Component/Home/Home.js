@@ -261,8 +261,16 @@ export default class Home extends LitElement {
           display: block;
           width: 32%;
           position: relative;
-          top: 39%;
-          right: 12%;
+          top: 0;
+          right:59%;
+          }
+          .userDataForm {
+            width: 30%;
+          }
+        }
+        @media all and (max-width: 600px) {
+          #search_id{
+            width: 10px;
           }
         }
         .no-flexbox .Rtable {

@@ -36,32 +36,4 @@ suite("Header element test", () => {
 
   })
 
-  // test('has a sideBar', async () => {
-  //     const el = await fixture(html`<app-home></app-home>`);
-  //     const sideBar = el.shadowRoot.getElementByClassName('.bookLanding__homepage');
-  //     const sideBar2 = sideBar.getElementByTagName('side-bar')
-  // });
-
-  // test('Delete specific data from after delete button click', async () => {
-  //     const el = await fixture(html`<app-home></app-home>`);
-  //     const deleteBtn = el.shadowRoot.querySelector('.delete-btn');
-
-  //     deleteBtn.click();
-  //     await el.updateComplete;
-  // });
-
-  // test('side navigation drawer should close', async () => {
-  //     const el = await fixture(html`<header-element></header-element>`);
-  //     const menu = el.shadowRoot.querySelector('.menu');
-
-  //     menu.click();
-  //     await el.updateComplete;
-
-  //     const closeBtn = el.shadowRoot.querySelector('.closebtn');
-  //     closeBtn.click();
-  //     await el.updateComplete;
-
-  //     const sideBar = el.shadowRoot.querySelector('#drawer');
-  //     assert.equal(sideBar.style.width, "0px");
-  // });
 });
