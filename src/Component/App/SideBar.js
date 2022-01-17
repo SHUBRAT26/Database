@@ -3,6 +3,7 @@ import { css } from "@lion/core";
 import globalCss from "../../CSS/style-module";
 
 class SideBar extends LitElement {
+  // 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
   
   /**
    * Returns styles specifically related to this component
@@ -124,14 +125,7 @@ class SideBar extends LitElement {
     document.getElementById("main").style.marginLeft = "0";
   }
 
-  /**
-     * 
-     * @param {*} e Event Object
-     */
-    searchClick(e) {
-       
-    }
-
+  /**HTML main page rendering */
   render() {
     return html`
       <div id="mySidebar" class="sidebar" @click="${this.closeNav}">
