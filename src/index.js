@@ -3,8 +3,8 @@ import "./styles.css";
 
 /** Import of the other component */
 import "./Component/Home/Home";
-import "./Component/IndianBooks/IndianBooks";
-import "./Component/InternationalBooks/Internationalbook";
+import "./Component/About/About"
+
 
 import { router } from "lit-element-router";
 
@@ -27,14 +27,6 @@ export class AppRoot extends router(LitElement) {
         name: "home",
         pattern: "*",
         data: { title: "Home" },
-      },
-      {
-        name: "IndianBooks",
-        pattern: "IndianBooks",
-      },
-      {
-        name: "InternationalBooks",
-        pattern: "InternationalBooks",
       },
       {
         name: "about",
@@ -65,10 +57,7 @@ export class AppRoot extends router(LitElement) {
             this.route === "home"? html`<app-home route="home"></app-home>`: html ``
           }
           ${
-            this.route === "IndianBooks"?html`<app-indian-books route="IndianBooks"></app-indian-books>`: html``
-          }
-          ${
-            this.route === "InternationalBooks"? html`<app-book-international route="InternationalBooks"    ></app-book-international>`: html``
+            this.route === "about"?html`<app-about route="about"></app-about>`: html``
           }
         </main-wrapper>
       </div>

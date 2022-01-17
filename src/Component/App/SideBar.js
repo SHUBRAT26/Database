@@ -3,6 +3,7 @@ import { css } from "@lion/core";
 import globalCss from "../../CSS/style-module";
 
 class SideBar extends LitElement {
+  
   /**
    * Returns styles specifically related to this component
    */
@@ -136,7 +137,6 @@ class SideBar extends LitElement {
       <div id="mySidebar" class="sidebar" @click="${this.closeNav}">
         <a href="javascript:void(0)" class="closebtn">X</a>
         <a href="/home">Home</a>
-        <a href="/IndianBooks">Indian Books</a>
         <a href="/about">About</a>
       </div>
       <ul>
