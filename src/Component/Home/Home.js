@@ -69,6 +69,7 @@ export default class Home extends LitElement {
           margin-bottom: 5%;
           padding: 1%;
           width: 30%;
+          box-shadow: 5px 5px 5px 5px#888888;
         }
         .btn-submit {
           color: black;
@@ -96,7 +97,7 @@ export default class Home extends LitElement {
           padding: 1%;
           border-radius: 10px 10px;
           background-color: lightcoral;
-          box-shadow: 0 0 60px rgba(0, 0, 0, 50%);
+          box-shadow: 5px 5px #888888;
           display: block;
           width: 16%;
           position: relative;
